@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet"  href="{% static 'accounts/css/main.css' %}" />
+    <link rel="stylesheet"  href="{% static 'accounts/css/signin.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'accounts/css/bootstrap.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'accounts/css/navbar-top-fixed.css' %}"
+    />
+    <style>
+       
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="#">CMS v.0.0.1</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      {% if user.is_authenticated %}
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+              {% if not request.user.customer %}
+              <li class="nav-item ">
+                <a href="{% url 'dashboard' %}" class="nav-link">Home</a>
+              </li>        
+              <li class="nav-item ">
+                <a href="" class="nav-link">items</a>
+              </li>        
+              <!-- <li class="nav-item ">
+                <a href="#" class="nav-link">Customers</a>
+              </li> -->
+              <li class="nav-item ">
+                <a href="#" class="nav-link">History</a>
+              </li>
+              <!-- <li class="nav-item ">
+                <a href="{% url 'orders' %}" class="nav-link">orders</a>
+              </li> -->
+              {% else %}
+              {% endif %}
+            </ul>
+            <ul class="navbar-nav ml-auto form-inline mt-2 mt-md-0">
+             
+              <li class="nav-item ">
+               {% if request.user.customer %}
+               <a class="nav-link" href="{% url 'user' %}"> <i><b>{{user}}</b></i></a>
+               {% else %}
+               <a class="nav-link" href="{% url 'dashboard' %}"> <i><b>{{user}}</b></i></a>
+               {% endif %}
+              </li> 
+              <li class="nav-item ">
+                <a class="nav-link" href="{% url 'logout' %}"> logout</a>
+              </li> 
+            </ul>
+            
+          </div>
+      {% else %}
+      
+      {% endif %}
+    </nav>
+      <div class="">
+        {% block content %} {% endblock content %}
+      </div>
+      <script src="{% static 'accounts/js/main.js' %}"></script>
+      <script src="{% static 'accounts/js/jquery-3.3.1.min.js' %}"></script>
+      <script src="{% static 'accounts/js/bootstrap.min.js' %}"></script>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+{% extends 'accounts/base.html' %} {% block content %}
+<h1 class="text-center">Update Order</h1>
+<form action="" method="post">
+  {% csrf_token %} 
+  {% if request.user.customer %}
+  {{form1.as_p}}
+  {% else %}
+  {{form2.as_p}}
+  {% endif %}
+  <button class="btn btn-sm btn-primary">Create/Update</button>
+</form>
+{% endblock content %}

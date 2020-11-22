@@ -1,0 +1,13 @@
+body {
+  background: rgb(192, 72, 72);
+}
+
+#total-orders {
+  background-color: rgb(209, 0, 73);
+}
+#orders-delivered {
+  background-color: rgb(81, 194, 0);
+}
+#orders-pending {
+  background-color: rgb(213, 121, 1);
+}
