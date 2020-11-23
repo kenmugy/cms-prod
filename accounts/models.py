@@ -46,21 +46,21 @@ class Order(models.Model):
     def get_absolute_url(self):
         return reverse("Order_detail", kwargs={"pk": self.pk})
 
-class OrderHistory(models.Model):
-    STATUSES = (
-        ("Delivered", "Delivered"),
-        ("Pending", "Pending"),
-        # ("Out for Delivery", "Out for Delivery"),
-    )
-    name = models.CharField("Item", max_length=50)
-    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null= True)
-    item = models.ForeignKey(Item, on_delete=models.SET_NULL, null= True)
-    quantity = models.IntegerField(default = 0, null = True)
-    status = models.CharField( max_length=200, choices = STATUSES,default="Pending", null=True)
-    date_created = models.DateTimeField( auto_now=False, auto_now_add=True)
+# class OrderHistory(models.Model):
+#     STATUSES = (
+#         ("Delivered", "Delivered"),
+#         ("Pending", "Pending"),
+#         # ("Out for Delivery", "Out for Delivery"),
+#     )
+#     name = models.CharField("Item", max_length=50)
+#     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null= True)
+#     item = models.ForeignKey(Item, on_delete=models.SET_NULL, null= True)
+#     quantity = models.IntegerField(default = 0, null = True)
+#     status = models.CharField( max_length=200, choices = STATUSES,default="Pending", null=True)
+#     date_created = models.DateTimeField( auto_now=False, auto_now_add=True)
 
-    def __str__(self):
-        return f"no.{self.id} | status {self.status}"
+#     def __str__(self):
+#         return f"no.{self.id} | status {self.status}"
 
     # def get_absolute_url(self):
     #     return reverse("Order_detail", kwargs={"pk": self.pk})

@@ -4,5 +4,5 @@ from .models import *
 # Register your models here.
 admin.site.register(Customer)
 admin.site.register(Order)
-admin.site.register(OrderHistory)
+# admin.site.register(OrderHistory)
 admin.site.register(Item)
