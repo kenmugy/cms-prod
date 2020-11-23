@@ -1,4 +1,5 @@
 {% extends 'accounts/base.html' %} {% block content %}
+{% load crispy_forms_tags %}
 <div class="row">
   <div class="col">
     <div class="col-md">
@@ -73,7 +74,7 @@
   <div class="col-md-4">
     <div class="card card-body">
       <form action="" method="post">
-        {% csrf_token %} {{form}}
+        {% csrf_token %} {{form|crispy}}
         <button class="btn btn-sm btn-primary" type="submit">Search</button>
         <a href="" class="btn btn-sm btn-dark" type="submit">Reset</a>
       </form>
@@ -89,7 +90,7 @@
           <tr>
             <th>Product</th>
             <!-- <th>Color</th> -->
-            <th>Size</th>
+            <th>Qty</th>
             <th>Date Ordered</th>
             <th>Status</th>
             <th>Update</th>

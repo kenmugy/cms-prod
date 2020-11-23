@@ -1,3 +1,4 @@
+from datetime import date
 from django.shortcuts import render, get_object_or_404,get_list_or_404, redirect
 from django.forms import inlineformset_factory
 from django.contrib.auth import authenticate, login, logout
@@ -28,7 +29,8 @@ def logoutView(request):
 @login_required
 @admin_only
 def dashboard(request):
-    orders = Order.objects.all().order_by('-date_created')
+    # orders = Order.objects.all().order_by('-date_created')
+    orders = Order.objects.filter(date_created__date=date.today()).order_by('-date_created')
     p_orders = orders.filter(status="Pending")
     d_orders = orders.filter(status="Delivered")
     customers = Customer.objects.filter()
@@ -65,7 +67,8 @@ def orders(request):
 def customers(request, pk):
     customer = get_object_or_404(Customer, id=pk)
     form = OrderSearchForm(request.POST or None)
-    orders = customer.order_set.all().order_by('-date_created')
+    # total_orders = customer.order_set.all().order_by('-date_created')
+    orders = customer.order_set.all().filter(date_created__date=date.today()).order_by('-date_created')
     p_orders = customer.order_set.filter(status="Pending").count()
     orders_count = orders.count()
     context = {
@@ -94,7 +97,7 @@ def customers(request, pk):
 
 @login_required 
 def create_order(request, pk):
-    OrderFormSet = inlineformset_factory(Customer, Order, fields = ("name", "quantity"), extra=3)
+    OrderFormSet = inlineformset_factory(Customer, Order, fields = ("name", "quantity"), extra=10)
 
     # if not request.user.customer:
     #     OrderFormSet = inlineformset_factory(Customer, Order, fields = ( "status"), extra=3)
@@ -108,7 +111,7 @@ def create_order(request, pk):
             return redirect('user')
         else:
             return redirect('dashboard')
-    return render(request, 'accounts/order_form.html', {"formset": formset})
+    return render(request, 'accounts/order_form.html', {"form1": formset})
 
 @login_required
 def update_order(request, pk):
@@ -156,7 +159,8 @@ def delete_all_order(request):
 def UserPage(request):
     
     form = OrderSearchForm(request.POST or None)
-    orders = request.user.customer.order_set.all().order_by('-date_created')
+    # total_orders = request.user.customer.order_set.all().order_by('-date_created')
+    orders = request.user.customer.order_set.filter(date_created__date=date.today()).order_by('-date_created')
     orders_count = orders.count()
     context = {
         'customer': request.user, 
@@ -184,7 +188,7 @@ def UserPage(request):
             }
     return render(request, 'accounts/user.html', context)
 
-
+# def
 
 # todays orders
 #   orders = customer.order_set.filter(date_created__lte=datetime.date.today()) : <=

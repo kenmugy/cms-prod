@@ -14,5 +14,5 @@ urlpatterns = [
     path('login/', loginView, name='login'),
     path('logout/', logoutView, name='logout'),
     path('user/', UserPage, name='user'),
-    # path('login/', LoginView.as_view(template_name='accounts/login.html'), name='login'),
+    # path("history/", history, name="history"),
 ]

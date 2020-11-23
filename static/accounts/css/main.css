@@ -11,3 +11,13 @@ body {
 #orders-pending {
   background-color: rgb(213, 121, 1);
 }
+
+div.form-check {
+  display: none;
+}
+
+#hd {
+  background-color: #127F91;
+  color: white;
+  padding-left: 10px;
+}
