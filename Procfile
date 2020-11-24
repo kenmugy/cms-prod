@@ -1,1 +1,1 @@
-add web: gunicorn cms.wsgi
+web: gunicorn cms.wsgi
