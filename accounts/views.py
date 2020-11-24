@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404,get_list_or_404, redirect
 from django.forms import inlineformset_factory
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.messages import success
+from django.contrib.messages import success, info, warning
 from .models import *
 from .forms import *
 from .decorators import authenticated_user, allowed_user, admin_only
@@ -16,7 +16,6 @@ def loginView(request):
 		password = request.POST.get('password')
 		user = authenticate(request, username=username, password=password)
 		if user is not None:
-			success(request,'Logged in')
 			login(request, user)
 			return redirect('dashboard')
 
@@ -105,6 +104,7 @@ def create_order(request, pk):
 	# form = OrderForm(request.POST or None, initial = {"customer":customer})
 	formset = OrderFormSet(request.POST or None,queryset = Order.objects.none(), instance=customer)
 	if formset.is_valid():
+		info(request, 'order created')
 		formset.save()
 		# return redirect(f'/customers/{customer.id}')
 		if request.user.customer:
@@ -124,9 +124,11 @@ def update_order(request, pk):
 		'form2': form2,
 	}
 	if form1.is_valid():
+		info(request, 'order updated')
 		form1.save()
 		return redirect('user')
 	elif form2.is_valid():
+		info(request, 'order updated')
 		form2.save()
 		return redirect('dashboard')
 
@@ -142,6 +144,7 @@ def update_order(request, pk):
 def delete_order(request, pk):
 	orderquery = get_object_or_404(Order, id=pk)
 	if request.method == 'POST':
+		warning(request, 'order deleted')
 		orderquery.delete()
 		return redirect('dashboard')
 	
@@ -151,6 +154,7 @@ def delete_order(request, pk):
 def delete_all_order(request):
 	orderquery = Order.objects.all()
 	if request.method == 'POST':
+		warning(request, 'orders deleted')
 		orderquery.delete()
 		return redirect('dashboard')
 	
