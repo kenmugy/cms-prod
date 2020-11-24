@@ -27,7 +27,7 @@ SECRET_KEY = 'ab4mn@)%)je7pwz(3wd-(@=37yt)wfvps&0-68r%x!jt1c^-c3'
 DEBUG = True
 
 # ALLOWED_HOSTS = ['db2-cms.herokuapp.com', 'localhost']
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['cmsdb.herokuapp.com']
 
 
 # Application definition
