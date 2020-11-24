@@ -139,4 +139,4 @@ LOGIN_REDIRECT_URL = 'dashboard'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-django_heroku.settings(local())
+django_heroku.settings(locals())
