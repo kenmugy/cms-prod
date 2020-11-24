@@ -1,8 +1,8 @@
-{% extends 'accounts/base.html' %} {% block content %}
+{% extends 'accounts/base.html' %} {% block content %} 
 {% load crispy_forms_tags %}
 
 <div class="row mb-4">
-    <div class="col-md-4">
+  <div class="col-md-4">
     <div class="card card-body">
       <form action="" method="post">
         {% csrf_token %} {{form|crispy}}
@@ -28,14 +28,13 @@
           </tr>
         </thead>
         <tbody>
-          {% for order in request.user.customer.order_set.all %}
+          {% for order in orders %}
           <tr>
             <td>{{order.name}}</td>
             <!-- <td>{{order.item.color}}</td> -->
             <td>{{order.quantity}}</td>
             <td>{{order.date_created}}</td>
             <td>{{order.status}}</td>
-           
           </tr>
           {% endfor %}
         </tbody>
@@ -45,36 +44,33 @@
 </div>
 {% else %}
 <div class="row">
-    <div class="col-md">
-      <div class="card card-body">
-        <table class="table table-sm">
-          <thead>
-            <tr>
-              <th>Product</th>
-              <!-- <th>Color</th> -->
-              <th>Qty</th>
-              <th>Customer</th>
-              <th>Date Ordered</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for order in orders %}
-            <tr>
-              <td>{{order.name}}</td>
-              <!-- <td>{{order.item.color}}</td> -->
-              <td>{{order.quantity}}</td>
-              <td>{{order.customer}}</td>
-              <td>{{order.date_created}}</td>
-              <td>{{order.status}}</td>
-             
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
+  <div class="col-md">
+    <div class="card card-body">
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <!-- <th>Color</th> -->
+            <th>Qty</th>
+            <th>Customer</th>
+            <th>Date Ordered</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in orders.all %}
+          <tr>
+            <td>{{order.name}}</td>
+            <!-- <td>{{order.item.color}}</td> -->
+            <td>{{order.quantity}}</td>
+            <td>{{order.customer}}</td>
+            <td>{{order.date_created}}</td>
+            <td>{{order.status}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
   </div>
-{% endif %}
-
-{% endblock content %}
+</div>
+{% endif %} {% endblock content %}

@@ -7,7 +7,8 @@ def authenticated_user(view_func):
             return redirect('dashboard')
         return view_func(request,*args, **kwargs)
     return wrapper_func
-        
+
+
 def allowed_user(allowed_roles=[]):
     def decorator_func(view_func):
         def wrapper_func(request, *args, **kwargs):
@@ -20,6 +21,7 @@ def allowed_user(allowed_roles=[]):
             return HttpResponse('Your not Authorised to view this page')
         return wrapper_func
     return decorator_func          
+        
         
 def admin_only(view_func):
     def wrapper_func(request, *args, **kwargs):

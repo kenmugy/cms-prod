@@ -69,7 +69,7 @@ def customers(request, pk):
 	form = OrderSearchForm(request.POST or None)
 	# total_orders = customer.order_set.all().order_by('-date_created')
 	orders = customer.order_set.all().filter(date_created__date=date.today()).order_by('-date_created')
-	p_orders = customer.order_set.filter(status="Pending").count()
+	p_orders = orders.filter(status="Pending").count()
 	orders_count = orders.count()
 	context = {
 		'customer': customer, 
@@ -83,8 +83,7 @@ def customers(request, pk):
 		
 		orders = customer.order_set.filter(
 			name__icontains = form['name'].value(),
-			status__icontains = form['status'].value(),
-			)
+			status__icontains = form['status'].value())
 		context = {
 			'customer': customer,  
 			'p_orders': p_orders, 
@@ -191,9 +190,11 @@ def UserPage(request):
 def all_orders(request):
 	form = OrderSearchForm(request.POST or None)
 	orders = Order.objects.all().order_by('-date_created')
+	
 	context = {
-		'customer': request.user, 
+		# 'customer': request.user, 
 		'orders': orders, 
+		# 'cus_orders':orders.filter(customer=request.user.customer),
 		'form': form,
 		}
 	
@@ -204,7 +205,8 @@ def all_orders(request):
 			status__icontains = form['status'].value(),
 		)
 		context = {
-			'customer': request.user, 
+			# 'customer': request.user, 
+			
 			'orders': orders, 
 			'form': form,
 			}
