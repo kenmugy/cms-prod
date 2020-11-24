@@ -1,4 +1,7 @@
 {% extends 'accounts/base.html' %} {% block content %}
+{% block title %}
+<title>Login</title>
+{% endblock title %}
 <div class="text-center">
   <form class="form-signin" method="POST">
     {% csrf_token %}

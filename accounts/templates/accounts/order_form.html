@@ -1,6 +1,9 @@
 {% extends 'accounts/base.html' %} {% block content %}
+{% block title %}
+<title>Order</title>
+{% endblock title %}
 {% load crispy_forms_tags %}
-<h1 class="text-center">Update Order</h1>
+<h1 class="text-center">Create/Update Order</h1>
 <form action="" method="post" class="" style="max-width: 60%; margin: 0 auto;">
   {% csrf_token %} 
   {% if request.user.customer %}

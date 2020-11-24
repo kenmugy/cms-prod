@@ -1,4 +1,7 @@
 {% extends 'accounts/base.html' %} {% block content %}
+{% block title %}
+<title>Delete</title>
+{% endblock title %}
 <div class="container">
     <form method="post" action="" class="card">
       {% csrf_token %}
