@@ -35,7 +35,8 @@ def dashboard(request):
 	d_orders = orders.filter(status="Delivered")
 	customers = Customer.objects.filter()
 	context = {
-		'orders': orders[:5],
+		'orders': orders,
+		'f_orders': orders[:5],
 		'customers': customers,
 		'total_orders': orders.count(),
 		'p_orders': p_orders.count(),

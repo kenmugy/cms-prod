@@ -58,7 +58,7 @@
           </tr>
         </thead>
         <tbody>
-          {% for order in orders.all %}
+          {% for order in user.customer.order_set.all %}
           <tr>
             <td>{{order.name}}</td>
             <!-- <td>{{order.item.color}}</td> -->

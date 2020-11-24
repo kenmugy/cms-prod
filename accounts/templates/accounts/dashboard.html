@@ -21,7 +21,8 @@
                     <tr class="">
                         <td>{{customer.id}}</td>
                         <td>{{customer.name}}</td>
-                        <td>{{customer.order_set.all.count}}</td>
+                        <!-- <td>{{customer.order_set.all.count}}</td> -->
+                        <td>{{customer.order_set.count}}</td>
                         <td><a href="{% url 'customers'  customer.id %}" class="btn btn-sm btn-info">View</a></td>
                     </tr>
                     {% endfor %}
@@ -45,7 +46,7 @@
                 </tr>
                 {% if orders %}
                 <tr>
-                    {% for order in orders %}
+                    {% for order in f_orders %}
                     <td>{{order.name}}</td>
                     <td>{{order.quantity}}</td>
                     <td>{{order.customer}}</td>
