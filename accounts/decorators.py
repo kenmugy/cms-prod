@@ -28,6 +28,7 @@ def admin_only(view_func):
         group = None
         if request.user.groups.exists():
             group = request.user.groups.all()[0].name
+
         if group == 'shop':
             return redirect('user')
         elif group == 'store':
@@ -36,4 +37,15 @@ def admin_only(view_func):
             return redirect('login')
     return wrapper_func
         
-    
+
+
+
+
+
+
+
+
+
+
+
+
